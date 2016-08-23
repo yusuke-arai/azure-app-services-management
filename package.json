@@ -1,0 +1,15 @@
+{
+  "name": "azure-app-services-management",
+  "version": "1.0.0",
+  "description": "Manage Azure App Services.",
+  "main": "dist/restart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yusuke Arai <arai@zamec.org>",
+  "dependencies": {
+    "azure-cli" : "*",
+    "coffee-script" : "*",
+    "validator" : ">=5.2"
+  }
+}
