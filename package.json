@@ -9,7 +9,6 @@
   "author": "Yusuke Arai <arai@zamec.org>",
   "dependencies": {
     "azure-cli" : "*",
-    "coffee-script" : "*",
-    "validator" : ">=5.2"
+    "coffee-script" : "*"
   }
 }

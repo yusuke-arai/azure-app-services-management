@@ -1,6 +1,7 @@
 child_process = require "child_process"
 process = require "process"
-validator = require "validator"
+path = require "path"
+fs = require "fs"
 
 exec = (command, success) ->
   child_process.exec "#{command} --json", (error) ->
@@ -18,16 +19,23 @@ execSync = (commands) ->
   )()
 
 main = ->
-  cli = "node_modules/azure-cli/bin/azure"
+  cli = path.normalize __dirname + "/../node_modules/azure-cli/bin/azure"
+  # Check Azure CLI executable file exists.
+  fs.access cli, fs.constants.X_OK, (error) ->
+    if error != null
+      console.log error.message
+      process.exit 1
+    checkCommandLineArguments()
 
-  # Check command line arguments.
-  if process.argv.length != 4 or !validator.isAscii(process.argv[2]) or !validator.isAscii(process.argv[3])
+checkCommandLineArguments = ->
+  if process.argv.length != 4
     console.log "Usage: restart.coffee <resource_group> <service_name>"
     process.exit 1
   resourceGroup = process.argv[2]
   serviceName = process.argv[3]
+  executeCommands resourceGroup, serviceName
 
-  # Execute commands sequentially.
+executeCommands = (resourceGroup, serviceName) ->
   execSync([
     "#{cli} config mode arm",
     "#{cli} webapp restart #{resourceGroup} #{serviceName}"
