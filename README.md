@@ -7,7 +7,7 @@ Manage Azure App Services.
 
 ## Install
 ```
-git clone git@github.com:yusuke-arai/azure-app-services-management.git
+git clone https://github.com/yusuke-arai/azure-app-services-management.git
 cd azure-app-services-management
 npm install
 ```
