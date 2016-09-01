@@ -3,6 +3,9 @@ process = require "process"
 path = require "path"
 fs = require "fs"
 
+# Azure CLI executable
+cli = path.normalize __dirname + "/../node_modules/azure-cli/bin/azure"
+
 exec = (command, success) ->
   child_process.exec "#{command} --json", (error) ->
     if error != null
@@ -19,7 +22,6 @@ execSync = (commands) ->
   )()
 
 main = ->
-  cli = path.normalize __dirname + "/../node_modules/azure-cli/bin/azure"
   # Check Azure CLI executable file exists.
   fs.access cli, fs.constants.X_OK, (error) ->
     if error != null
