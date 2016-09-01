@@ -32,6 +32,10 @@
   };
 
   main = function() {
+    if (!process.env.HOME) {
+      console.log("Environment variable HOME is not given. Set to '/root'");
+      process.env.HOME = "/root";
+    }
     return fs.access(cli, fs.constants.X_OK, function(error) {
       if (error !== null) {
         console.log(error.message);

@@ -22,6 +22,11 @@ execSync = (commands) ->
   )()
 
 main = ->
+  # Automatically set HOME if not given.
+  if !process.env.HOME
+    console.log "Environment variable HOME is not given. Set to '/root'"
+    process.env.HOME = "/root"
+
   # Check Azure CLI executable file exists.
   fs.access cli, fs.constants.X_OK, (error) ->
     if error != null
